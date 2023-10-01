@@ -70,9 +70,10 @@ public class Tank{
     
     
     
-    public void agregarTanque(GraphicsContext gc, int ran1, int ran2, int[][]matriz,int vida, int opcion) {
+    public void agregarTanque(GraphicsContext gc, int ran1, int ran2, int[][]matriz,int vida) {
         int[] x=null;
         int[] y=null;
+        int opcion = Jugar.getRandom();
         if(opcion == 0){
             if(jugadorTanque == 1){
                 x = new int[]{120, 60, 210, 268};
@@ -85,22 +86,22 @@ public class Tank{
         }
         if(opcion == 1){
             if(jugadorTanque == 1){
-                x = new int[]{120, 60, 210, 268};
-                y = new int[]{546, 500, 480, 390};
+                x = new int[]{100, 60, 160, 205};
+                y = new int[]{543, 520, 480, 390};
             }
             else if(jugadorTanque == 2){
-                x = new int[]{842, 1020, 750, 647};
-                y = new int[]{580,360, 370, 207};
+                x = new int[]{837, 1070, 738, 960};
+                y = new int[]{245,550, 310, 400};
             }
             }
         if(opcion == 2){
             if(jugadorTanque == 1){
-                x = new int[]{120, 60, 210, 268};
-                y = new int[]{500, 500, 480, 390};
+                x = new int[]{120, 60, 180, 50};
+                y = new int[]{370, 400, 380,400};
             }
             else if(jugadorTanque == 2){
-                x = new int[]{842, 1020, 750, 647};
-                y = new int[]{580,360, 370, 207};
+                x = new int[]{900, 1020, 1110, 695};
+                y = new int[]{580,360, 340, 207};
             }
         }
         if (x != null && y != null) {
@@ -122,6 +123,7 @@ public class Tank{
                }
             } 
             this.vida=vida;
+        System.out.println(ran1);
     }
     
 

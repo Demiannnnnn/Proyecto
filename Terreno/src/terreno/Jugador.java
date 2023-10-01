@@ -22,13 +22,13 @@ public class Jugador {
         this.color = color;
         this.jugador = jugador;
         this.rand=new Random();
-        this.random1=rand.nextInt(3);
-        this.random2=rand.nextInt(3);
+        this.random1=rand.nextInt(4);
+        this.random2=rand.nextInt(4);
     }
     
-    public void creaTanque(GraphicsContext gc, int[][] matriz, int vida, int opcion){
+    public void creaTanque(GraphicsContext gc, int[][] matriz, int vida){
         Tank tanque = new Tank(color, jugador);
-        tanque.agregarTanque(gc,this.random1,this.random2, matriz,vida, opcion);
+        tanque.agregarTanque(gc,this.random1,this.random2, matriz,vida);
         this.tanque=tanque;
     }
 

@@ -95,7 +95,7 @@ public class Jugar extends Application {
     Jugador jugador1 = new Jugador(gc, "tanque1.png", 1);
     Jugador jugador2 = new Jugador(gc, "tanque2.png", 2);
 
-    static final int terreno_random;
+    private static final int terreno_random;
 
     static {
         terreno_random = random.nextInt(3);

@@ -105,8 +105,8 @@ public class Terreno{
                 }
             }
         }
-        jugador1.creaTanque(gc,matriz,vida, Jugar.getRandom());
-        jugador2.creaTanque(gc,matriz,vida, Jugar.getRandom());
+        jugador1.creaTanque(gc,matriz,vida);
+        jugador2.creaTanque(gc,matriz,vida);
         jugador1.getTanque().modificarCañon(gc,angulo,1);
         jugador2.getTanque().modificarCañon(gc,angulo,2);
     }
@@ -136,8 +136,8 @@ public class Terreno{
         }
 
 
-        jugador1.creaTanque(gc,matriz,vida, Jugar.getRandom());
-        jugador2.creaTanque(gc,matriz,vida, Jugar.getRandom());
+        jugador1.creaTanque(gc,matriz,vida);
+        jugador2.creaTanque(gc,matriz,vida);
         jugador1.getTanque().modificarCañon(gc,angulo,1);
         jugador2.getTanque().modificarCañon(gc,angulo,2);
     }
@@ -152,9 +152,9 @@ public class Terreno{
         agregarImagenDeFondo(gc);
 
 
-        amplitud = 0.1;
-        frecuencia = 0.01;
-        for (int i = 0; i < 65; i++) {
+        amplitud = 0.03;
+        frecuencia = 0.1;
+        for (int i = 0; i < 70; i++) {
             for (int j = 0; j < ancho; j++) {
                 if (dunas[i][j] != -1) {
                     double nx = (double) i / alto;
@@ -171,7 +171,7 @@ public class Terreno{
 
         amplitud = 0.21;
         frecuencia = 0.045;
-        for (int i = 10; i < 330; i++) {
+        for (int i = 50; i < 330; i++) {
             for (int j = 0; j < ancho; j++) {
                 if (dunas[i][j] != -1) {
                     double nx = (double) i / alto;
@@ -185,6 +185,26 @@ public class Terreno{
                 }
             }
         }
+
+
+        amplitud = 0.1;
+        frecuencia = 0.045;
+        for (int i = 130; i < 250; i++) {
+            for (int j = 0; j < ancho; j++) {
+                if (dunas[i][j] != -1) {
+                    double nx = (double) i / alto;
+                    double ny = (double) j / ancho;
+                    double altura_dunas = nivel_mar + amplitud * Math.sin(frecuencia * nx * alto);
+                    if (ny >= altura_dunas) {
+                        gc.setFill(Color.rgb(27,113,97));
+                        gc.fillRect(i * escala, j * escala, escala, escala);
+                        dunas[i][j] = 1;
+                    }
+                }
+            }
+        }
+
+
 
 
 
@@ -209,8 +229,8 @@ public class Terreno{
             }
         }
 
-        jugador1.creaTanque(gc,matriz,vida, Jugar.getRandom());
-        jugador2.creaTanque(gc,matriz,vida, Jugar.getRandom());
+        jugador1.creaTanque(gc,matriz,vida);
+        jugador2.creaTanque(gc,matriz,vida);
         jugador1.getTanque().modificarCañon(gc,angulo,1);
         jugador2.getTanque().modificarCañon(gc,angulo,2);
     }
