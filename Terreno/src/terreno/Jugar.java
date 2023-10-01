@@ -23,7 +23,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.util.Random;
 
-
+//alo
 public class Jugar extends Application {
 
     static Random random = new Random();
