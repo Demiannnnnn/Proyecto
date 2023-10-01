@@ -70,14 +70,45 @@ public class Tank{
     
     
     
-    public void agregarTanque(GraphicsContext gc, int ran1, int ran2, int[][]matriz,int vida) {
-        if(jugadorTanque == 1) {
+    public void agregarTanque(GraphicsContext gc, int ran1, int ran2, int[][]matriz,int vida, int opcion) {
+        int[] x=null;
+        int[] y=null;
+        if(opcion == 0){
+            if(jugadorTanque == 1){
+                x = new int[]{120, 60, 210, 268};
+                y = new int[]{546, 500, 480, 390};
+            }
+            else if(jugadorTanque == 2){
+                x = new int[]{842, 1020, 750, 647};
+                y = new int[]{580,360, 370, 207};
+            }
+        }
+        if(opcion == 1){
+            if(jugadorTanque == 1){
+                x = new int[]{120, 60, 210, 268};
+                y = new int[]{546, 500, 480, 390};
+            }
+            else if(jugadorTanque == 2){
+                x = new int[]{842, 1020, 750, 647};
+                y = new int[]{580,360, 370, 207};
+            }
+            }
+        if(opcion == 2){
+            if(jugadorTanque == 1){
+                x = new int[]{120, 60, 210, 268};
+                y = new int[]{500, 500, 480, 390};
+            }
+            else if(jugadorTanque == 2){
+                x = new int[]{842, 1020, 750, 647};
+                y = new int[]{580,360, 370, 207};
+            }
+        }
+        if (x != null && y != null) {
             Image tanque = new Image(getClass().getResourceAsStream(color));
-            int[] x = {120, 60, 210, 268};
-            int[] y = {546, 500, 480, 390};
-            gc.drawImage(tanque, x[ran1], y[ran1], 70, 70); 
-            posicion[0] = x[ran1]+6;
-            posicion[1] = y[ran1]+13;
+            gc.drawImage(tanque, x[ran1], y[ran1], 70, 70);
+            posicion[0] = x[ran1] + 6;
+            posicion[1] = y[ran1] + 13;
+        }
             int hitboxAncho=1;
             int hitboxLargo=2;
             for(int i=0;i<ancho+hitboxAncho;i++){
@@ -91,41 +122,9 @@ public class Tank{
                }
             } 
             this.vida=vida;
-        }
-        else{
-            Image tanque = new Image(getClass().getResourceAsStream(color));
-            int []x = {842, 1020, 750, 647};
-            int []y = {580,360, 370, 207};
-            gc.drawImage(tanque, x[ran2], y[ran2], 70, 70); 
-            posicion[0] = x[ran2]+7;
-            posicion[1] = y[ran2]+13;
-            int hitboxAncho=1;
-            int hitboxLargo=3;
-            for(int i=0;i<ancho+hitboxAncho;i++){
-                for(int j=0;j<alto+hitboxLargo;j++){
-                    //actualizar la colicion de la matriz
-                    int posXMatriz = (posicion[0] / 3 + i);
-                    int posYMatriz = (posicion[1] / 3 + j);
-                    if (posXMatriz >= 0 && posXMatriz < matriz.length && posYMatriz >= 0 && posYMatriz < matriz[0].length){
-                        matriz[posXMatriz][posYMatriz] = 3;
-                    }
-                }
-            }
-            this.vida=vida;
-        }     
     }
     
-    /*public void borrarCañon(GraphicsContext gc){
-        int x = posicion[0];
-        int y = posicion[1];
-        int cx = x + 35;
-        int cy = y + 35;
-        double anguloRad = Math.toRadians(angulo);
-        double cañonX = cx + Math.cos(anguloRad) * 2;
-        double cañonY = cy + Math.sin(anguloRad) * 2;
-        gc.clearRect(cañonX - 35, cañonY - 35, 70, 70);
-    }*/
-    
+
     public int ajustar_vida(int vida){
         this.vida-=vida;
         System.out.println("Vida actual del tanque = "+ this.vida);

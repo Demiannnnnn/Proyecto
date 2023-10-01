@@ -21,11 +21,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import java.util.Random;
 
 
 public class Jugar extends Application {
-    
+
+    static Random random = new Random();
     private int turno = 1;
     double angulo;
     double velocidad;
@@ -90,8 +91,16 @@ public class Jugar extends Application {
     int alto = 400;
     int ancho=300;
     int pixel = 3;
+
     Jugador jugador1 = new Jugador(gc, "tanque1.png", 1);
     Jugador jugador2 = new Jugador(gc, "tanque2.png", 2);
+
+    static final int terreno_random;
+
+    static {
+        terreno_random = random.nextInt(3);
+    }
+
     Terreno terrain = new Terreno(alto,ancho, pixel,jugador1, jugador2,gc);
 
     public static void main(String[] args) {
@@ -211,7 +220,15 @@ public class Jugar extends Application {
 
 
         terrain.iniciar();
-        terrain.terreno_aram(gc,0.0,validar);
+        if(terreno_random == 0) {
+            terrain.terreno_nieve(gc, 0.0, validar);
+        }
+        if(terreno_random == 1) {
+            terrain.terreno_desierto(gc, 0.0, validar);
+        }
+        if(terreno_random == 2) {
+            terrain.terreno_aram(gc, 0.0, validar);
+        }
         primaryStage.show();
         validar=1;
 
@@ -242,6 +259,7 @@ public class Jugar extends Application {
                         @Override
 
                         public void handle(long now){
+
                             
                             nuevaBala.dibujo(gc);
                             double tiempoActual = System.nanoTime() / 1e9*5;
@@ -272,7 +290,15 @@ public class Jugar extends Application {
                             }
                             if (nuevaBala.eliminar()) {                               
                                 //gc.clearRect(0, 0, 400, 300);
-                                terrain.terreno_aram(gc, 0.0,vidatanque1);
+                                if(terreno_random == 0) {
+                                    terrain.terreno_nieve(gc, 0.0, vidatanque1);
+                                }
+                                if(terreno_random == 1) {
+                                    terrain.terreno_desierto(gc, 0.0, vidatanque1);
+                                }
+                                if(terreno_random == 2) {
+                                    terrain.terreno_aram(gc, 0.0, vidatanque1);
+                                }
                                 turno = 2;
                                 disparar.setDisable(false);
                                 boxtanque1.setVisible(false);
@@ -290,10 +316,12 @@ public class Jugar extends Application {
                     Bala nuevaBala = new Bala((int) cañonX, (int) cañonY, pixel, angulo, velocidad,0);
 
                     new AnimationTimer() {
+
                         double tiempoAnterior = System.nanoTime() / 1e9*5;
                         @Override
 
                         public void handle(long now){
+
                             
                             double tiempoActual = System.nanoTime() / 1e9*5;
                             double deltaTiempo = tiempoActual - tiempoAnterior;
@@ -302,6 +330,7 @@ public class Jugar extends Application {
                             tiempoAnterior = tiempoActual;
                             victoria=terrain.colision_terreno(gc, nuevaBala,terrain.dunas, terrain.matriz);
                             nuevaBala.dibujo(gc);
+
                             if(victoria==1){
                                 vidatanque1=jugador1.getTanque().ajustar_vida(50);
                                 turno=2;
@@ -325,12 +354,20 @@ public class Jugar extends Application {
                             }
                             if (nuevaBala.eliminar()) {                               
                                 //gc.clearRect(0, 0, 400, 300);
-                                terrain.terreno_aram(gc, 0.0,vidatanque2);
+                                if(terreno_random == 0) {
+                                    terrain.terreno_nieve(gc, 0.0, vidatanque2);
+                                }
+                                if(terreno_random == 1) {
+                                    terrain.terreno_desierto(gc, 0.0, vidatanque2);
+                                }
+                                if(terreno_random == 2) {
+                                    terrain.terreno_aram(gc, 0.0, vidatanque2);
+                                }
                                 turno = 1;
                                 disparar.setDisable(false);
                                 boxtanque2.setVisible(false);
                                 boxtanque1.setVisible(true);
-                                stop();      
+                                stop();
                             }
                         }
                     }.start();
@@ -339,5 +376,11 @@ public class Jugar extends Application {
                 entradavelocidad.setText("");
             }
         );
+
     }
+
+    public static int getRandom(){
+        return terreno_random;
+    }
+
 }

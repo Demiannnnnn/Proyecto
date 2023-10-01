@@ -35,14 +35,14 @@ public class Terreno{
             }
         }
     }
-    public void agregarImagenDeFondo(GraphicsContext gc, int opcion) {
-        if (opcion == 1) {
+    public void agregarImagenDeFondo(GraphicsContext gc) {
+        if (Jugar.getRandom() == 0) {
             gc.drawImage(nieve, 0, 0, 400 * pixel, 320 * pixel);//MODIFICACION
         }
-        if (opcion == 2) {
+        if (Jugar.getRandom() == 1) {
             gc.drawImage(desierto, 0, 0, 400 * pixel, 320 * pixel);//MODIFICACION
         }
-        if (opcion == 3) {
+        if (Jugar.getRandom() == 2) {
             gc.drawImage(lol, 0, 0, 400 * pixel, 320 * pixel);//MODIFICACION
         }
 
@@ -55,7 +55,7 @@ public class Terreno{
         double nivel_mar = 0.5;//MODIFICACION
         double amplitud = 0.17;
         double frecuencia = 0.03;
-        agregarImagenDeFondo(gc,2);
+        agregarImagenDeFondo(gc);
         
         for (int i = 0; i < alto/2; i++) {
             for (int j = 0; j < ancho; j++) {
@@ -105,8 +105,8 @@ public class Terreno{
                 }
             }
         }
-        jugador1.creaTanque(gc,matriz,vida);
-        jugador2.creaTanque(gc,matriz,vida);
+        jugador1.creaTanque(gc,matriz,vida, Jugar.getRandom());
+        jugador2.creaTanque(gc,matriz,vida, Jugar.getRandom());
         jugador1.getTanque().modificarCañon(gc,angulo,1);
         jugador2.getTanque().modificarCañon(gc,angulo,2);
     }
@@ -118,7 +118,7 @@ public class Terreno{
         double nivel_mar = 0.5;//MODIFICACION
         double amplitud = 0.17;
         double frecuencia = 0.0385;
-        agregarImagenDeFondo(gc,2);
+        agregarImagenDeFondo(gc);
 
         for (int i = 0; i < alto; i++) {
             for (int j = 0; j < ancho; j++) {
@@ -136,8 +136,8 @@ public class Terreno{
         }
 
 
-        jugador1.creaTanque(gc,matriz,vida);
-        jugador2.creaTanque(gc,matriz,vida);
+        jugador1.creaTanque(gc,matriz,vida, Jugar.getRandom());
+        jugador2.creaTanque(gc,matriz,vida, Jugar.getRandom());
         jugador1.getTanque().modificarCañon(gc,angulo,1);
         jugador2.getTanque().modificarCañon(gc,angulo,2);
     }
@@ -149,7 +149,7 @@ public class Terreno{
         double nivel_mar = 0.5;//MODIFICACION
         double amplitud = 0.17;
         double frecuencia = 0.03;
-        agregarImagenDeFondo(gc,3);
+        agregarImagenDeFondo(gc);
 
 
         amplitud = 0.1;
@@ -161,7 +161,7 @@ public class Terreno{
                     double ny = (double) j / ancho;
                     double altura_dunas = nivel_mar + amplitud * Math.sin(frecuencia * nx * alto);
                     if (ny >= altura_dunas) {
-                        gc.setFill(Color.rgb(255, 255, 255));
+                        gc.setFill(Color.rgb(27,113,97));
                         gc.fillRect(i * escala, j * escala, escala, escala);
                         dunas[i][j] = 1;
                     }
@@ -178,7 +178,7 @@ public class Terreno{
                     double ny = (double) j / ancho;
                     double altura_dunas = nivel_mar + amplitud * Math.sin(frecuencia * nx * alto);
                     if (ny >= altura_dunas) {
-                        gc.setFill(Color.rgb(255, 255, 255));
+                        gc.setFill(Color.rgb(27,113,97));
                         gc.fillRect(i * escala, j * escala, escala, escala);
                         dunas[i][j] = 1;
                     }
@@ -201,7 +201,7 @@ public class Terreno{
                     double ny = (double) j / ancho;
                     double altura_dunas = nivel_mar + amplitud * Math.sin(frecuencia * nx * alto);
                     if (ny >= altura_dunas) {
-                        gc.setFill(Color.rgb(255, 255, 255));
+                        gc.setFill(Color.rgb(27,113,97));
                         gc.fillRect(i * escala, j * escala, escala, escala);
                         dunas[i][j] = 1;
                     }
@@ -209,8 +209,8 @@ public class Terreno{
             }
         }
 
-        jugador1.creaTanque(gc,matriz,vida);
-        jugador2.creaTanque(gc,matriz,vida);
+        jugador1.creaTanque(gc,matriz,vida, Jugar.getRandom());
+        jugador2.creaTanque(gc,matriz,vida, Jugar.getRandom());
         jugador1.getTanque().modificarCañon(gc,angulo,1);
         jugador2.getTanque().modificarCañon(gc,angulo,2);
     }

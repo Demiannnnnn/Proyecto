@@ -26,9 +26,9 @@ public class Jugador {
         this.random2=rand.nextInt(3);
     }
     
-    public void creaTanque(GraphicsContext gc, int[][] matriz, int vida){
+    public void creaTanque(GraphicsContext gc, int[][] matriz, int vida, int opcion){
         Tank tanque = new Tank(color, jugador);
-        tanque.agregarTanque(gc,this.random1,this.random2, matriz,vida);
+        tanque.agregarTanque(gc,this.random1,this.random2, matriz,vida, opcion);
         this.tanque=tanque;
     }
 
