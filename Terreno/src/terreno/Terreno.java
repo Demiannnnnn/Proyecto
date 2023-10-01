@@ -8,9 +8,12 @@ public class Terreno{
     public int[][] matriz;
     public int pixel;
     public int[][]dunas;
-    Image imagenFondo = new Image(getClass().getResourceAsStream("frozen.jpg"));
+    Image nieve = new Image(getClass().getResourceAsStream("frozen.jpg"));
+    Image desierto  = new Image(getClass().getResourceAsStream("d3.jpg"));
+    Image lol = new Image(getClass().getResourceAsStream("lolo.jpg"));
     Jugador jugador1;
     Jugador jugador2;
+
 
     public Terreno(int alto, int ancho, int pixel,Jugador jugador1, Jugador jugador2,GraphicsContext gc ) {
         this.pixel=pixel;
@@ -32,18 +35,27 @@ public class Terreno{
             }
         }
     }
-    public void agregarImagenDeFondo(GraphicsContext gc) {
-        gc.drawImage(imagenFondo, 0, 0, 400 * pixel, 320 * pixel);//MODIFICACION
+    public void agregarImagenDeFondo(GraphicsContext gc, int opcion) {
+        if (opcion == 1) {
+            gc.drawImage(nieve, 0, 0, 400 * pixel, 320 * pixel);//MODIFICACION
+        }
+        if (opcion == 2) {
+            gc.drawImage(desierto, 0, 0, 400 * pixel, 320 * pixel);//MODIFICACION
+        }
+        if (opcion == 3) {
+            gc.drawImage(lol, 0, 0, 400 * pixel, 320 * pixel);//MODIFICACION
+        }
+
     }
 
-    public void dibujar(GraphicsContext gc, Double angulo, int vida) {
+    public void terreno_nieve(GraphicsContext gc, Double angulo, int vida) {
         int alto = 400;
         int ancho = 300;
         int escala = this.pixel;
         double nivel_mar = 0.5;//MODIFICACION
         double amplitud = 0.17;
         double frecuencia = 0.03;
-        agregarImagenDeFondo(gc);
+        agregarImagenDeFondo(gc,2);
         
         for (int i = 0; i < alto/2; i++) {
             for (int j = 0; j < ancho; j++) {
@@ -93,6 +105,110 @@ public class Terreno{
                 }
             }
         }
+        jugador1.creaTanque(gc,matriz,vida);
+        jugador2.creaTanque(gc,matriz,vida);
+        jugador1.getTanque().modificarCañon(gc,angulo,1);
+        jugador2.getTanque().modificarCañon(gc,angulo,2);
+    }
+
+    public void terreno_desierto(GraphicsContext gc, Double angulo, int vida) {
+        int alto = 400;
+        int ancho = 300;
+        int escala = this.pixel;
+        double nivel_mar = 0.5;//MODIFICACION
+        double amplitud = 0.17;
+        double frecuencia = 0.0385;
+        agregarImagenDeFondo(gc,2);
+
+        for (int i = 0; i < alto; i++) {
+            for (int j = 0; j < ancho; j++) {
+                if (dunas[i][j] != -1) {
+                    double nx = (double) i / alto;
+                    double ny = (double) j / ancho;
+                    double altura_dunas = nivel_mar + amplitud * Math.sin(frecuencia * nx * alto);
+                    if (ny >= altura_dunas) {
+                        gc.setFill(Color.rgb(128, 64, 0));
+                        gc.fillRect(i * escala, j * escala, escala, escala);
+                        dunas[i][j] = 1;
+                    }
+                }
+            }
+        }
+
+
+        jugador1.creaTanque(gc,matriz,vida);
+        jugador2.creaTanque(gc,matriz,vida);
+        jugador1.getTanque().modificarCañon(gc,angulo,1);
+        jugador2.getTanque().modificarCañon(gc,angulo,2);
+    }
+
+    public void terreno_aram(GraphicsContext gc, Double angulo, int vida) {
+        int alto = 400;
+        int ancho = 300;
+        int escala = this.pixel;
+        double nivel_mar = 0.5;//MODIFICACION
+        double amplitud = 0.17;
+        double frecuencia = 0.03;
+        agregarImagenDeFondo(gc,3);
+
+
+        amplitud = 0.1;
+        frecuencia = 0.01;
+        for (int i = 0; i < 65; i++) {
+            for (int j = 0; j < ancho; j++) {
+                if (dunas[i][j] != -1) {
+                    double nx = (double) i / alto;
+                    double ny = (double) j / ancho;
+                    double altura_dunas = nivel_mar + amplitud * Math.sin(frecuencia * nx * alto);
+                    if (ny >= altura_dunas) {
+                        gc.setFill(Color.rgb(255, 255, 255));
+                        gc.fillRect(i * escala, j * escala, escala, escala);
+                        dunas[i][j] = 1;
+                    }
+                }
+            }
+        }
+
+        amplitud = 0.21;
+        frecuencia = 0.045;
+        for (int i = 10; i < 330; i++) {
+            for (int j = 0; j < ancho; j++) {
+                if (dunas[i][j] != -1) {
+                    double nx = (double) i / alto;
+                    double ny = (double) j / ancho;
+                    double altura_dunas = nivel_mar + amplitud * Math.sin(frecuencia * nx * alto);
+                    if (ny >= altura_dunas) {
+                        gc.setFill(Color.rgb(255, 255, 255));
+                        gc.fillRect(i * escala, j * escala, escala, escala);
+                        dunas[i][j] = 1;
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+        amplitud = 0.1;
+        frecuencia = 0.01;
+        for (int i = 326; i < alto; i++) {
+            for (int j = 0; j < ancho; j++) {
+                if (dunas[i][j] != -1) {
+                    double nx = (double) i / alto;
+                    double ny = (double) j / ancho;
+                    double altura_dunas = nivel_mar + amplitud * Math.sin(frecuencia * nx * alto);
+                    if (ny >= altura_dunas) {
+                        gc.setFill(Color.rgb(255, 255, 255));
+                        gc.fillRect(i * escala, j * escala, escala, escala);
+                        dunas[i][j] = 1;
+                    }
+                }
+            }
+        }
+
         jugador1.creaTanque(gc,matriz,vida);
         jugador2.creaTanque(gc,matriz,vida);
         jugador1.getTanque().modificarCañon(gc,angulo,1);

@@ -211,7 +211,7 @@ public class Jugar extends Application {
 
 
         terrain.iniciar();
-        terrain.dibujar(gc,0.0,validar);
+        terrain.terreno_aram(gc,0.0,validar);
         primaryStage.show();
         validar=1;
 
@@ -272,7 +272,7 @@ public class Jugar extends Application {
                             }
                             if (nuevaBala.eliminar()) {                               
                                 //gc.clearRect(0, 0, 400, 300);
-                                terrain.dibujar(gc, 0.0,vidatanque1);
+                                terrain.terreno_aram(gc, 0.0,vidatanque1);
                                 turno = 2;
                                 disparar.setDisable(false);
                                 boxtanque1.setVisible(false);
@@ -325,7 +325,7 @@ public class Jugar extends Application {
                             }
                             if (nuevaBala.eliminar()) {                               
                                 //gc.clearRect(0, 0, 400, 300);
-                                terrain.dibujar(gc, 0.0,vidatanque2);
+                                terrain.terreno_aram(gc, 0.0,vidatanque2);
                                 turno = 1;
                                 disparar.setDisable(false);
                                 boxtanque2.setVisible(false);
